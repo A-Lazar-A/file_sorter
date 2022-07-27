@@ -1,6 +1,6 @@
 import click
 import os
-import shutil
+from shutil import move
 from art import text2art
 
 folder_for_extensions = {
@@ -27,11 +27,15 @@ def folder_name(extension: str) -> str:
 @click.argument('path')
 def file_sorter(path: str) -> None:
     """
-
+    This program sorts files in the given folder according to their extensions and then puts them to the new folders
+made specifically for each type of extension.
+    If an extension of file is not listed in the provided dictionary,then program makes a folder named with this
+extension and puts the file into it.
+    If program finds a file with no extension or a folder it does nothing.
     """
-    click.echo(text2art('File Sorter'))
+    click.secho(text2art('File Sorter'))
     if not os.path.exists(path):
-        click.echo(f'No such directory: {path}')
+        click.secho(f'No such directory: {path}')
         exit(1)
     files = os.listdir(path)
 
@@ -46,15 +50,15 @@ def file_sorter(path: str) -> None:
 
         if new_folder == 'Nope':
             if os.path.exists(path + '/' + extension):
-                shutil.move(path + '/' + file, path + '/' + extension)
+                move(path + '/' + file, path + '/' + extension)
             else:
                 os.makedirs(path + '/' + extension)
-                shutil.move(path + '/' + file, path + '/' + extension)
+                move(path + '/' + file, path + '/' + extension)
         elif os.path.exists(path + '/' + new_folder):
-            shutil.move(path + '/' + file, path + '/' + new_folder)
+            move(path + '/' + file, path + '/' + new_folder)
         else:
             os.makedirs(path + '/' + new_folder)
-            shutil.move(path + '/' + file, path + '/' + new_folder)
+            move(path + '/' + file, path + '/' + new_folder)
 
 
 if __name__ == '__main__':
