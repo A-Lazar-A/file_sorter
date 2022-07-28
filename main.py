@@ -44,10 +44,11 @@ extension and puts the file into it.
         extension = extension[1:]
 
         if not extension:
+            click.echo(f'Skipping the {filename}')
             continue
 
         new_folder = folder_name(extension)
-
+        click.echo(f'Moving the {file}')
         if new_folder == 'Nope':
             if os.path.exists(path + '/' + extension):
                 move(path + '/' + file, path + '/' + extension)
