@@ -1,7 +1,7 @@
-import click
 import os
 from shutil import move
-from art import text2art
+import eel
+from time import sleep
 
 folder_for_extensions = {
     'video': ('mp4', 'mov', 'avi', 'mkv', 'wmv', 'mpg', 'mpeg', 'm4v', 'h264'),
@@ -23,9 +23,8 @@ def folder_name(extension: str) -> str:
     return 'Nope'
 
 
-@click.command()
-@click.argument('path')
-def file_sorter(path: str) -> None:
+@eel.expose
+def file_sorter(path: str) -> str:
     """
     This program sorts files in the given folder according to their extensions and then puts them to the new folders
 made specifically for each type of extension.
@@ -33,10 +32,10 @@ made specifically for each type of extension.
 extension and puts the file into it.
     If program finds a file with no extension or a folder it does nothing.
     """
-    click.secho(text2art('File Sorter'))
+
     if not os.path.exists(path):
-        click.secho(f'No such directory: {path}')
-        exit(1)
+        return '<h3>Path does not exist</h3>'
+
     files = os.listdir(path)
 
     for file in files:
@@ -44,11 +43,9 @@ extension and puts the file into it.
         extension = extension[1:]
 
         if not extension:
-            click.echo(f'Skipping the {filename}')
             continue
 
         new_folder = folder_name(extension)
-        click.echo(f'Moving the {file}')
         if new_folder == 'Nope':
             if os.path.exists(path + '/' + extension):
                 move(path + '/' + file, path + '/' + extension)
@@ -60,7 +57,11 @@ extension and puts the file into it.
         else:
             os.makedirs(path + '/' + new_folder)
             move(path + '/' + file, path + '/' + new_folder)
+    return '<h3>Sorting is done!</h3>'
 
 
 if __name__ == '__main__':
-    file_sorter()
+    eel.init('web')
+
+    eel.start('main.html', size=(500, 400))
+
