@@ -37,27 +37,29 @@ extension and puts the file into it.
         return '<h3>Path does not exist</h3>'
 
     files = os.listdir(path)
+    try:
+        for file in files:
+            filename, extension = os.path.splitext(file)
+            extension = extension[1:].lower()
 
-    for file in files:
-        filename, extension = os.path.splitext(file)
-        extension = extension[1:].lower()
+            if not extension:
+                continue
 
-        if not extension:
-            continue
-
-        new_folder = folder_name(extension)
-        if new_folder == 'Nope':
-            if os.path.exists(path + '/' + extension):
-                move(path + '/' + file, path + '/' + extension)
+            new_folder = folder_name(extension)
+            if new_folder == 'Nope':
+                if os.path.exists(path + '/' + extension):
+                    move(path + '/' + file, path + '/' + extension)
+                else:
+                    os.makedirs(path + '/' + extension)
+                    move(path + '/' + file, path + '/' + extension)
+            elif os.path.exists(path + '/' + new_folder):
+                move(path + '/' + file, path + '/' + new_folder)
             else:
-                os.makedirs(path + '/' + extension)
-                move(path + '/' + file, path + '/' + extension)
-        elif os.path.exists(path + '/' + new_folder):
-            move(path + '/' + file, path + '/' + new_folder)
-        else:
-            os.makedirs(path + '/' + new_folder)
-            move(path + '/' + file, path + '/' + new_folder)
-    return '<h3>Sorting is done!</h3>'
+                os.makedirs(path + '/' + new_folder)
+                move(path + '/' + file, path + '/' + new_folder)
+        return '<h3>Sorting is done!</h3>'
+    except Exception as e:
+        return f'<h3>Error occurred: {e}</h3>'
 
 
 if __name__ == '__main__':
