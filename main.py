@@ -5,7 +5,7 @@ from time import sleep
 
 folder_for_extensions = {
     'video': ('mp4', 'mov', 'avi', 'mkv', 'wmv', 'mpg', 'mpeg', 'm4v', 'h264'),
-    'audio': ('mp3', 'wav', 'ogg', 'flac', 'aif', 'mid', 'midi', 'wma'),
+    'audio': ('mp3', 'wav', 'ogg', 'flac', 'aif', 'mid', 'midi', 'wma', 'm4a'),
     'image': ('jpg', 'png', 'bmp', 'jpeg', 'svg', 'tif', 'tiff'),
     'archive': ('zip', 'rar', '7z', 'z', 'gz', 'pkg', 'deb'),
     'text': ('pdf', 'txt', 'doc', 'docx', 'rtf', 'odt'),
