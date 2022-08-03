@@ -65,5 +65,5 @@ extension and puts the file into it.
 if __name__ == '__main__':
     eel.init('web')
 
-    eel.start('main.html', size=(500, 400))
+    eel.start('main.html', size=(600, 500))
 
