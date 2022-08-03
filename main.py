@@ -40,7 +40,7 @@ extension and puts the file into it.
 
     for file in files:
         filename, extension = os.path.splitext(file)
-        extension = extension[1:]
+        extension = extension[1:].lower()
 
         if not extension:
             continue
