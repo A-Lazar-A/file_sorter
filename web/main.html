@@ -23,10 +23,13 @@
 </head>
 <body>
     
-    <div class="container">
+    <div class="container" >
         <div class="row py-5 text-center ">
             <h1><b>Select the folder to sort</b></h1>
 
+        </div>
+        <div class="row text-center" id="result">
+                
         </div>
         <div class="row justify-content-center">
             <div class="col-auto">
@@ -38,19 +41,36 @@
                 
 
                 <div class="col-auto d-grid gap-2">
-                    <button type="button" class="btn btn-lg btn-light" id="sort">Sort</button>  
+                    <button type="button" class="btn btn-lg btn-light" id="sort" onclick="hide()">Sort</button>  
                 </div>
 
             
         </div>
-        
+    </div>
+    <div class="container text-center" id="spin">
+        <div class="col-auto py-5">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Загрузка...</span>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
-        async function start_sort(){
-            let path = ducomunent.getElementById('fullPath').value;
+        
+        function sleep(ms) {
+            console.log(`Waiting`);
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function hide(){
+            document.getElementsByClassName('container')[0].style.display = "none";
+            document.getElementsByClassName('container')[1].style.display = "block";
+            let path = document.getElementById('fullPath').value;
 
             let res = await eel.file_sorter(path)();
 
-
+            document.getElementById('result').innerHTML = res
+            console.log(`Go`);
+            document.getElementsByClassName('container')[1].style.display = "none";
+            document.getElementsByClassName('container')[0].style.display = "block";
         }
     </script>
     

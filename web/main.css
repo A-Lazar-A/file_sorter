@@ -28,3 +28,9 @@ input[type=text]:focus {
 	font-weight:bold;
 
 }
+
+#spin{
+	display: none;
+	width: 3rem;
+	height: 3rem
+}
