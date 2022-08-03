@@ -59,7 +59,7 @@ extension and puts the file into it.
                 move(path + '/' + file, path + '/' + new_folder)
         return '<h3>Sorting is done!</h3>'
     except Exception as e:
-        return f'<h3>Error occurred: {e}</h3>'
+        return f'<h3>Error occurred:<br>{e}</h3>'
 
 
 if __name__ == '__main__':
