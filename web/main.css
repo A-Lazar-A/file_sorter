@@ -1,0 +1,30 @@
+*{
+	font-family: 'Didact Gothic', sans-serif;
+}
+
+body{
+	background: rgb(210,183,59);
+    background: linear-gradient(90deg, rgba(210,183,59,1) 0%, rgba(222,48,48,1) 51%, rgba(143,0,17,1) 100%);
+}
+
+div.container{
+	top: 50%;
+}
+
+input[type=text] {
+	border: 3px solid black;
+	border-radius: 6px;
+	outline: none;
+	padding: 12px 20px;
+	margin: 8px 0;
+}
+
+input[type=text]:focus {
+  border: 3px solid #E4E6F3;
+}
+
+#sort{
+
+	font-weight:bold;
+
+}
